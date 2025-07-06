@@ -2,18 +2,35 @@ import React from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import Input from "../../components/Input";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-hot-toast";
+import { validateEmail } from "../../utils/helper";
+// import { userContext } from "../../Context/UserContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    
+    // const { updateUser } = useContext(userContext);
+
     const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+          setError("Enter a valid email address");
+          return;
+        }
+        if (!password) {
+          setError("Enter a password");
+          return;
+        }
+
+        setError("");
+
+        //Login API call
     
   }
 
@@ -30,7 +47,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               label="Email Address"
-              placeholder="aria@gmail.com"
+              placeholder="Enter you email"
               type="text"
           />
 
