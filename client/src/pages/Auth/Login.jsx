@@ -5,34 +5,53 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { toast } from "react-hot-toast";
 import { validateEmail } from "../../utils/helper";
-// import { userContext } from "../../Context/UserContext";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import { userContext } from "../../context/UserContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    
-    // const { updateUser } = useContext(userContext);
+  // const { updateUser } = useContext(userContext);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
-          setError("Enter a valid email address");
-          return;
-        }
-        if (!password) {
-          setError("Enter a password");
-          return;
-        }
+      setError("Enter a valid email address");
+      return;
+    }
+    if (!password) {
+      setError("Enter a password");
+      return;
+    }
 
-        setError("");
+    setError("");
 
-        //Login API call
-    
-  }
+    //Login API call
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+      const { token, user } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. please try again");
+      }
+    }
+  };
 
   return (
     <AuthLayout>
@@ -44,11 +63,11 @@ export default function Login() {
         </p>
         <form onSubmit={handleLogin}>
           <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              label="Email Address"
-              placeholder="Enter you email"
-              type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email Address"
+            placeholder="Enter you email"
+            type="text"
           />
 
           <Input

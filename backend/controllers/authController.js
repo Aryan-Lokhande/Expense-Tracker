@@ -49,7 +49,7 @@ export const loginUser = async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user || user.password !== password) {
-            return res.status(400).json({ message: "Ivalid credentials" });
+            return res.status(400).json({ message: "Invalid credentials" });
         }
 
         res.status(200).json({
