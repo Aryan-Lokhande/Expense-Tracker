@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 // import dashboardRoute from "./routes/dashboardRoute.js";
-// import cashflowRoute from "./routes/cashflowRoute.js";
+import cashflowRoute from "./routes/cashflowRoute.js";
 
 
 dotenv.config();
@@ -23,7 +23,7 @@ app.use(
 app.use(express.json());
 
 app.use("/api/v1/auth", authRoute);
-// app.use("/api/v1/cashflow", cashflowRoute);
+app.use("/api/v1/cashflow", cashflowRoute);
 // app.use("/api/v1/dashboard", dashboardRoute);
 
 // app.use("/api/v1/income", incomeRoutes);
