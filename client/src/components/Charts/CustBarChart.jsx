@@ -10,7 +10,6 @@ export default function CustBarChart({ data }) {
   console.log("data:", data);
 
   // Function to determine bar colors
-  // Function to alternate colors
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875cf5" : "#cfbefb";
   };
@@ -38,7 +37,7 @@ export default function CustBarChart({ data }) {
         <BarChart data={data}>
           <CartesianGrid stroke="none" />
           <XAxis
-            dataKey="date"
+            dataKey="category"
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
