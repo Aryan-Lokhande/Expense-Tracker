@@ -4,10 +4,10 @@ import IncomeOverview from "../../components/Income/IncomeOverview.jsx";
 import toast from "react-hot-toast";
 import axiosInstance from "../../utils/axiosinstance";
 import { API_PATHS } from "../../utils/apiPaths";
-// import Modal from "../../components/Modal.jsx";
-// import AddIncomeForm from "../../components/Income/AddIncomeForm";
+import Modal from "../../components/Modal.jsx";
+import AddIncomeForm from "../../components/Income/AddIncomeForm.jsx";
 import IncomeList from "../../components/Income/IncomeList.jsx";
-// import DeleteAlert from "../../components/layouts/DeleteAlert";
+import DeleteAlert from "../../components/layouts/DeleteAlert.jsx";
 import { useUserAuth } from "../../hooks/useUserAuth";
 
 const Income = () => {
@@ -131,8 +131,8 @@ const Income = () => {
             onDownload={handleDownloadIncomeDetails}
           />
         </div>
-
-        {/* <Modal
+        
+         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
           title="Add Income"
@@ -149,7 +149,7 @@ const Income = () => {
             content="Are you sure you want to delete this income?"
             onDelete={() => deleteIncome(openDeleteAlert.data)}
           />
-        </Modal> */}
+        </Modal>
       </div>
     </DashboardLayout>
   );
