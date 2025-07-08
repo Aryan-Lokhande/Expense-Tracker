@@ -2,20 +2,24 @@ import React from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import Input from "../../components/Input";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { validateEmail } from "../../utils/helper";
+import { userContext } from "../../context/UserContext";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import { toast } from "react-hot-toast";
 
 export default function SignUp() {
-  const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { updateUser } = useContext(userContext);
+
   const navigate = useNavigate();
   const handleSignup = async (e) => {
-    let profileImageUrl = "";
-
+    e.preventDefault();
     if (!fullName) {
       setError("Please enter your name");
       return;
@@ -25,20 +29,44 @@ export default function SignUp() {
       return;
     }
     if (!password) {
-     setError("Please enter a password");
+      setError("Please enter a password");
       return;
     }
 
     setError("");
 
     //Signup API call
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        fullName,
+        email,
+        password,
+      });
+      const { token, user, message } = response.data;
+      console.log("Signup response:", response.data);
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(user);
+        navigate("/dashboard");
+      }
+      toast.success("Account created successfully!", message);
+    } catch (error) {
+      console.error("Signup error:", error); // 🔥 this will show network issues, CORS, etc.
+
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("Something went wrong. please try again");
+      }
+    }
   };
 
   return (
     <AuthLayout>
       <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
         <h3 className="text-xl font-semibold text-black">Create an account</h3>
-        <p className="text-gray-500 mt-[5px] mb-6">
+        <p className="text-xs text-slate-700 mt-[5px] mb-6">
           Join us today by entering your details below
         </p>
 
@@ -56,7 +84,7 @@ export default function SignUp() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               label="Email"
-              placeholder="Enter you email"
+              placeholder="aria@gmail.com"
               type="text"
             />
 

@@ -14,7 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // const { updateUser } = useContext(userContext);
+  const { updateUser } = useContext(userContext);
 
   const navigate = useNavigate();
 
@@ -50,6 +50,8 @@ export default function Login() {
       } else {
         setError("Something went wrong. please try again");
       }
+      toast.error(error.response?.data?.message || "Log in failed. Please try again.");
+      console.error("Login error:", error);
     }
   };
 
