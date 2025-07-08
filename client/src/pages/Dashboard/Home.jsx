@@ -2,17 +2,17 @@ import React, {useEffect, useState} from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import {useUserAuth} from "../../hooks/useUserAuth";
 import {useNavigate} from "react-router-dom";
-import axiosInstance from "../../utils/axiosinstance";
+import axiosInstance from "../../utils/axiosinstance.js";
 import {API_PATHS} from "../../utils/apiPaths";
-import InfoCard from "../../components/card/InfoCard.jsx";
+import InfoCard from "../../components/Cards/InfoCard";
 
 import {LuHandCoins, LuWalletMinimal} from "react-icons/lu";
 import {IoMdCard} from "react-icons/io";
 import {addThousandsSeparator} from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions.jsx";
 import FinanceOverview from "../../components/Dashboard/FinanceOverview.jsx";
-// import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions";
-// import Last30DaysExpenses from "../../components/Dashboard/Last30DaysExpenses";
+import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions.jsx";
+import Last30DaysExpenses from "../../components/Dashboard/Last30DaysExpenses.jsx";
 // import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
 // import RecentIncome from "../../components/Dashboard/RecentIncome";
 
@@ -34,7 +34,7 @@ const Home = () => {
       );
       if (response.data) {
         setDashboardData(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       }
     } catch (error) {
       console.log("Something went wrong. Please try again:", error);
@@ -92,7 +92,7 @@ const Home = () => {
             )}
           />
 
-          {/*<ExpenseTransactions
+          <ExpenseTransactions
             transactions={dashboardData?.last30DaysExpenses?.transactions || []}
             onSeeMore={() => navigate("/expense")}
           />
@@ -100,8 +100,7 @@ const Home = () => {
           <Last30DaysExpenses
             data={dashboardData?.last30DaysExpenses?.transactions || []}
           />
-
-          <RecentIncomeWithChart
+          {/*<RecentIncomeWithChart
             data={
               dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []
             }
