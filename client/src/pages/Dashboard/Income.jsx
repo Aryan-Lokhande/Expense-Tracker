@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import IncomeOverview from "../../components/Income/IncomeOverview.jsx";
 import toast from "react-hot-toast";
 import axiosInstance from "../../utils/axiosinstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal.jsx";
-import AddIncomeForm from "../../components/Income/AddIncomeForm.jsx";
+import AddIncomeForm from "../../components/Transaction/AddIncomeForm.jsx";
 import TransactionSource from "../../components/Transaction/TransactionSource.jsx";
 import TransactionList from "../../components/Transaction/TransactionList.jsx";
 import DeleteAlert from "../../components/layouts/DeleteAlert.jsx";

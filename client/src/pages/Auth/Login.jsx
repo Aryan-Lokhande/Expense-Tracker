@@ -57,7 +57,13 @@ export default function Login() {
 
   return (
     <AuthLayout>
-      <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
+      <br />
+      <div className="bg-primary/10 border-l-4 border-blue-500 p-4 rounded shadow-md text-sm my-4 w-fit">
+        <p className="font-semibold">Demo Credentials:</p>
+        <p className="mt-2"><span className="font-medium">DemoUser</ span> → <code>demo.user@expensetracker.io</code>,&nbsp; <span className="font-medium">Pass: </span> <code>TrackDemo@321</code></p>
+      </div>
+     
+      <div className="lg:w-[70%] pt-6 flex flex-col justify-center">
         <h3 className="text-xl font-semibold">Welcome</h3>
         <p className="text-gray-500 text-xs mb-6 mt-[5px]">
           Please login to your account to continue using the Expense Tracker

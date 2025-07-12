@@ -7,7 +7,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import Overview from "../../components/Transaction/Overview.jsx";
 import TransactionList from "../../components/Transaction/TransactionList.jsx";
 import Modal from "../../components/Modal";
-import AddExpenseForm from "../../components/Expense/AddExpenseForm.jsx";
+import AddExpenseForm from "../../components/Transaction/AddExpenseForm.jsx";
 import DeleteAlert from "../../components/layouts/DeleteAlert.jsx";
 import TransactionSource from "../../components/Transaction/TransactionSource.jsx";
 
