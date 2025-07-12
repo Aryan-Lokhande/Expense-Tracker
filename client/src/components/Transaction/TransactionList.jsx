@@ -14,7 +14,7 @@ const TransactionList = ({transactions, onDelete, onDownload, list}) => {
           <LuDownload className="text-base" /> Download
         </button>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 h-[350px] overflow-y-auto scrollbar-none pr-2">
         {transactions?.map((transac) => (
           <TransactionInfoCard
             key={transac._id}

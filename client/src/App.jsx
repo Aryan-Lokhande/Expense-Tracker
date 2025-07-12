@@ -7,21 +7,26 @@ import Income from './pages/Dashboard/Income';
 import Expense from './pages/Dashboard/Expense';
 import {Toaster} from "react-hot-toast";
 import UserProvider from './context/UserContext';
+import MLFeatures from './pages/Dashboard/MLFeatures';
+import Footer from './components/Footer';
 
 function App() {
+  return (    
 
-  return (
     <UserProvider>
+      <Toaster/>
       <Router>
         <Routes>
           <Route path="/" element= {<Root/>} />
           <Route path="/login" exact element={<Login />} />
+          <Route path="/ml-features" exact element={<MLFeatures />} />
           <Route path="/signup" exact element={<SignUp />} />
           <Route path="/dashboard" exact element={<Home />} />
           <Route path="/income" exact element={<Income />} />
           <Route path="/expense" exact element={<Expense />} />
         </Routes>
-      </Router>      
+      </Router>
+      <Footer />
     </UserProvider>
   )
 }
