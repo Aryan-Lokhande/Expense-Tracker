@@ -3,12 +3,13 @@ import {useUserAuth} from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import toast from "react-hot-toast";
 import axiosInstance from "../../utils/axiosinstance";
-import {API_PATHS} from "../../utils/apiPaths";
-import ExpenseOverview from "../../components/Expense/ExpenseOverview.jsx";
-import ExpenseList from "../../components/Expense/ExpenseList.jsx";
+import { API_PATHS } from "../../utils/apiPaths";
+import Overview from "../../components/Transaction/Overview.jsx";
+import TransactionList from "../../components/Transaction/TransactionList.jsx";
 import Modal from "../../components/Modal";
 import AddExpenseForm from "../../components/Expense/AddExpenseForm.jsx";
 import DeleteAlert from "../../components/layouts/DeleteAlert.jsx";
+import TransactionSource from "../../components/Transaction/TransactionSource.jsx";
 
 function Expense() {
   useUserAuth();
@@ -31,7 +32,7 @@ function Expense() {
       const response = await axiosInstance.get(
         `${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`
       );
-
+      console.log(response.data);      
       if (response.data) {
         setExpenseData(response.data);
       }
@@ -43,7 +44,7 @@ function Expense() {
   };
 
   const handleAddExpense = async (expense) => {
-    const {category, amount, date, icon} = expense;
+    const { category, amount, date, icon } = expense;
 
     // Validation
     if (!category.trim()) {
@@ -90,7 +91,7 @@ function Expense() {
   const deleteExpense = async (id) => {
     try {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
-      setOpenDeleteAlert({show: false, data: null});
+      setOpenDeleteAlert({ show: false, data: null });
       toast.success("Expense details deleted successfully");
       fetchExpenseDetails();
     } catch (error) {
@@ -135,22 +136,29 @@ function Expense() {
     <DashboardLayout activeMenu="Expense">
       <div className="my-5 mx-auto">
         <div className="grid grid-cols-1 gap-6">
-         <div className="">
-            <ExpenseOverview
-              transactions={expenseData}
-              onExpenseIncome={() => setOpenAddExpenseModal(true)}
-            />
-          </div>
-           <ExpenseList
+          <Overview
             transactions={expenseData}
-            onDelete={(id) => {
-              setOpenDeleteAlert({show: true, data: id});
-            }}
-            onDownload={handleDownloadExpenseDetails}
+            onExpenseIncome={() => setOpenAddExpenseModal(true)}
+            view="Expense"
           />
         </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <TransactionList
+            transactions={expenseData}
+            onDelete={(id) => {
+              setOpenDeleteAlert({ show: true, data: id });
+            }}
+            onDownload={handleDownloadExpenseDetails}
+            list="Expense"
+          />
+            <TransactionSource
+            transactions={expenseData}
+            type="Expense"
+          />          
+        </div>
 
-         <Modal
+        <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
           title="Add Expense"
@@ -159,7 +167,7 @@ function Expense() {
         </Modal>
         <Modal
           isOpen={openDeleteAlert.show}
-          onClose={() => setOpenDeleteAlert({show: false, data: null})}
+          onClose={() => setOpenDeleteAlert({ show: false, data: null })}
           title="Delete Expense"
         >
           <DeleteAlert

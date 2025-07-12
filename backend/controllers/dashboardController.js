@@ -50,13 +50,13 @@ export const getDashboardData = async (req, res) => {
         (txn) => ({
           ...txn.toObject(),
           // toObject() coverts mongoose obj to plain js obj and ... here will unpack the fields
-          type: "income",
+          type: "Income",
         })
       ),
       ...(await Expense.find({ userId }).sort({ date: -1 }).limit(5)).map(
         (txn) => ({
           ...txn.toObject(),
-          type: "expense",
+          type: "Expense",
         })
       ),
     ].sort((a, b) => b.date - a.date); //sort latest first

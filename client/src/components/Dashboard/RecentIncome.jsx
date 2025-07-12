@@ -21,7 +21,7 @@ const RecentIncome = ({transactions, onSeeMore}) => {
             icon={item.icon}
             date={moment(item.date).format("Do MMM YYYY")}
             amount={item.amount}
-            type="income"
+            type="Income"
             hideDeleteBtn
           />
         ))}

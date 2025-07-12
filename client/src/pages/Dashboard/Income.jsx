@@ -6,9 +6,11 @@ import axiosInstance from "../../utils/axiosinstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal.jsx";
 import AddIncomeForm from "../../components/Income/AddIncomeForm.jsx";
-import IncomeList from "../../components/Income/IncomeList.jsx";
+import TransactionSource from "../../components/Transaction/TransactionSource.jsx";
+import TransactionList from "../../components/Transaction/TransactionList.jsx";
 import DeleteAlert from "../../components/layouts/DeleteAlert.jsx";
 import { useUserAuth } from "../../hooks/useUserAuth";
+import Overview from "../../components/Transaction/Overview.jsx";
 
 const Income = () => {
   useUserAuth();
@@ -120,18 +122,28 @@ const Income = () => {
     <DashboardLayout activeMenu="Income">
       <div className="my-5 mx-auto">
         <div className="grid grid-cols-1 gap-6">
-          <IncomeOverview
-            transactions={incomeData}
-            onAddIncome={() => setOpenAddIncomeModal(true)}
-          />
-
-          <IncomeList
-            transactions={incomeData}
-            onDelete={(id) => setOpenDeleteAlert({ show: true, data: id })}
-            onDownload={handleDownloadIncomeDetails}
-          />
+          <Overview
+              transactions={incomeData}
+              onExpenseIncome={() => setOpenAddIncomeModal(true)}
+              view="Income"
+            />
         </div>
         
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <TransactionList
+              transactions={incomeData}
+              onDelete={(id) => {
+                setOpenDeleteAlert({ show: true, data: id });
+              }}
+              onDownload={handleDownloadIncomeDetails}
+              list="Income"
+            />
+          <TransactionSource
+            transactions={incomeData}
+            type="Income"
+          />
+
+        </div>
          <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}

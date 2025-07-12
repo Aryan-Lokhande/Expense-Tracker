@@ -33,15 +33,43 @@ export const prepareExpenseBarChartData = (data = []) => {
   return chartData;
 };
 
-export const prepareIncomeBarChartData = (data = []) => {
-  const sortedData = [...data].sort(
-    (a, b) => new Date(a.date) - new Date(b.date)
-  );
+export const prepareExpenceBarChartData = (data = []) => {
+  const grouped = {};
 
-  const chartData = sortedData.map((item) => ({
-    date: moment(item.date).format("Do MMM"),
-    amount: item?.amount,
-    category: item?.source,
+  data.forEach(({ amount, category }) => {
+    if (!grouped[category]) {
+      grouped[category] = 0;
+    }
+    grouped[category] += amount;
+  });
+
+  console.log("Grouped Data:", grouped);
+
+  // Properly return an array of objects, not a single object inside an array
+  const chartData = Object.keys(grouped).map((category) => ({
+    date: category,
+    amount: grouped[category],
+  }));
+
+  return chartData;
+};
+
+export const prepareIncomeBarChartData = (data = []) => {
+  const grouped = {};
+
+  data.forEach(({ amount, source }) => {
+    if (!grouped[source]) {
+      grouped[source] = 0;
+    }
+    grouped[source] += amount;
+  });
+
+  console.log("Grouped Data:", grouped);
+
+  // Properly return an array of objects, not a single object inside an array
+  const chartData = Object.keys(grouped).map((source) => ({
+    date: source,
+    amount: grouped[source],
   }));
 
   return chartData;
