@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useUserAuth} from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import toast from "react-hot-toast";
-import { axiosInstance } from "../../utils/axiosinstance";
+import axiosInstance from "../../utils/axiosinstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import Overview from "../../components/Transaction/Overview.jsx";
 import TransactionList from "../../components/Transaction/TransactionList.jsx";

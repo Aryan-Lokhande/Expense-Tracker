@@ -5,7 +5,7 @@ import { addThousandsSeparator } from "../../utils/helper";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import { useUserAuth } from "../../hooks/useUserAuth";
-import {axiosInstance} from "../../utils/axiosinstance.js";
+import axiosInstance from "../../utils/axiosinstance.js";
 import { API_PATHS } from "../../utils/apiPaths";
 
 export default function MLFeatures() {
