@@ -4,8 +4,8 @@ import Input from "../../components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { toast } from "react-hot-toast";
-import { validateEmail } from "../../utils/helper.js";
-import axiosInstance from "../../utils/axiosinstance.js";
+import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axiosinstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { userContext } from "../../context/UserContext";
 
