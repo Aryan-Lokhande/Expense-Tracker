@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import toast from "react-hot-toast";
-import axiosInstance from "../../utils/axiosinstance";
+import {axiosInstance} from "../../utils/axiosinstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import Modal from "../../components/Modal.jsx";
 import AddIncomeForm from "../../components/Transaction/AddIncomeForm.jsx";
