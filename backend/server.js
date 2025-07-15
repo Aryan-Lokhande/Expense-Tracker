@@ -6,7 +6,7 @@ import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import dashboardRoute from "./routes/dashboardRoute.js";
 import cashflowRoute from "./routes/cashflowRoute.js";
-
+import mlRoute from "./routes/mlRoute.js";
 
 dotenv.config();
 
@@ -25,6 +25,7 @@ app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/cashflow", cashflowRoute);
 app.use("/api/v1/dashboard", dashboardRoute);
+app.use("/api/v1/ml", mlRoute);
 
 // app.use("/api/v1/income", incomeRoutes);
 // app.use("/api/v1/expense", expenseRoutes);
