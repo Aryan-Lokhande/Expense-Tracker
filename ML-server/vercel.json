@@ -1,5 +1,4 @@
 {
-    "version": 2,
     "builds": [
         {
             "src": "forecast.py",
@@ -7,10 +6,6 @@
         }
     ],
     "routes": [
-        {
-            "src": "/forecast",
-            "dest": "/forecast.py"
-        },
         {
             "src": "/(.*)",
             "dest": "/forecast.py"
