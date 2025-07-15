@@ -6,6 +6,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # To allow requests from your Node.js server
 
+@app.route("/")
+def home():
+    return "Forecasting Service is running!"
+
 @app.route("/forecast", methods=["POST"])
 def forecast():
     try:
