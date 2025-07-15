@@ -1,14 +1,19 @@
 {
-    "builds": [
-        {
-            "src": "forecast.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/forecast.py"
-        }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "forecast.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/forecast",
+      "dest": "/forecast.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/forecast.py"
+    }
+  ]
 }
