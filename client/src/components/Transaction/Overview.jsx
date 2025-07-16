@@ -22,7 +22,7 @@ const Overview = ({transactions, onExpenseIncome, view}) => {
         <div className="">
           <h5 className="text-lg">{viewType} Overview</h5>
           <p className="text-xs text-gray-400 mt-0.5">
-            {viewType} Overview: Analyze your {viewType.toLowerCase()} trends and gain insights into your financial habits.
+            Analyze your {viewType.toLowerCase()} trends and gain insights into your financial habits.
           </p>
         </div>
 
@@ -33,7 +33,7 @@ const Overview = ({transactions, onExpenseIncome, view}) => {
       </div>
 
       <div className="mt-10">
-        <CustomLineChart data={chartData} />
+        <CustomLineChart data={chartData} view={viewType} />
       </div>
     </div>
   );

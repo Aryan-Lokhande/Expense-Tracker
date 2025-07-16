@@ -1,19 +1,30 @@
 import React from "react";
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaChart } from "recharts";
+import { mergeDataByMonth } from "../../utils/helper";
 
-const CustomLineChart = ({data}) => {
-  const CustomTooltip = ({active, payload}) => {
+const CustomLineChart = ({data,view}) => {
+  const mergedData = mergeDataByMonth(data);
+  let color = "";
+  if (view === "Income") {
+    color = "#00bc7d";
+  } else if (view === "Expense") {
+    color = "#FA2C37";
+  } else {
+    color = "#875cf5"; // Default color
+  }
+  const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
+      const { amount, categories } = payload[0].payload;
       return (
-        <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
-            {payload[0].payload.category}
-          </p>
-          <p className="text-sm text-gray-600">
-            Amount:{" "}
-            <span className="text-sm font-medium text-gray-900">
-              ₹{payload[0].payload.amount}
-            </span>
+        <div className="bg-white shadow-md border px-4 py-2 rounded text-sm">
+          {/* <p className="font-semibold text-gray-700">{label}</p> */}
+          <p className="text-sm font-medium text-gray-700">
+            <span className="text-sm text-gray-500">
+              Categories:
+            </span>{" "}
+            {categories?.join(", ")}
+            <br />             
+            <span className="text-sm text-gray-500">Amount:</span> ₹{amount}
           </p>
         </div>
       );
@@ -23,28 +34,33 @@ const CustomLineChart = ({data}) => {
   return (
     <div className="bg-white">
       <ResponsiveContainer width="100%" height={300}>
-        <AreaChart data={data}>
+        <AreaChart data={mergedData}>
           <defs>
             <linearGradient id="incomeGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#875cf5" stopOpacity={0.4} />
-              <stop offset="95%" stopColor="#875cf5" stopOpacity={0} />
+              <stop offset="5%" stopColor={color} stopOpacity={0.4} />
+              <stop offset="95%" stopColor={color} stopOpacity={0} />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="none" />
+
+          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
           <XAxis
             dataKey="month"
-            tick={{fontSize: 12, fill: "#555"}}
+            tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
-          <YAxis tick={{fontSize: 12, fill: "#555"}} stroke="none" />
-          <Tooltip content={<CustomTooltip />} />
+          <YAxis
+            tick={{ fontSize: 12, fill: "#555" }}
+            stroke="none"
+            width={40}
+          />
+          <Tooltip content={CustomTooltip} />
           <Area
             type="monotone"
             dataKey="amount"
-            stroke="#875cf5"
+            stroke={color}
             fill="url(#incomeGradient)"
             strokeWidth={3}
-            dot={{r: 3, fill: "#ab8df8"}}
+            dot={{ r: 3, fill: "#fff" }}
           />
         </AreaChart>
       </ResponsiveContainer>

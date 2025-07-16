@@ -43,11 +43,12 @@ export const prepareExpenceBarChartData = (data = []) => {
     grouped[category] += amount;
   });
 
-  console.log("Grouped Data:", grouped);
+  // console.log("Grouped Data:", grouped);
 
   // Properly return an array of objects, not a single object inside an array
   const chartData = Object.keys(grouped).map((category) => ({
     date: category,
+    category: category,
     amount: grouped[category],
   }));
 
@@ -64,11 +65,12 @@ export const prepareIncomeBarChartData = (data = []) => {
     grouped[source] += amount;
   });
 
-  console.log("Grouped Data:", grouped);
+  // console.log("Grouped Data:", grouped);
 
   // Properly return an array of objects, not a single object inside an array
   const chartData = Object.keys(grouped).map((source) => ({
     date: source,
+    category: source,
     amount: grouped[source],
   }));
 
@@ -86,7 +88,36 @@ export const prepareExpenseLineChartData = (data = []) => {
     month: moment(item?.date).format("Do MMM"), // Fixed format (e.g., "1st Jan")
     amount: item?.amount,
     category: item?.category,
+    source: item?.source, // Added source for income data
   }));
 
   return chartData;
+};
+
+export const mergeDataByMonth = (dataObj) => {
+  const dataArray = Object.values(dataObj);
+  const merged = {};
+
+  dataArray.forEach(({ month, amount, category, source }) => {
+    let label=""; // Prefer category, fallback to source
+    if (category) {
+      label = category;
+    } else if (source) {
+      label = source;
+    }
+    // console.log("Label:", label);
+    if (!merged[month]) {
+      merged[month] = {
+        month,
+        amount,
+        categories: [label],
+      };
+    } else {
+      merged[month].amount += amount;
+      merged[month].categories.push(label);
+    }
+  });
+
+  // console.log("Merged Data:", merged);
+  return Object.values(merged);
 };

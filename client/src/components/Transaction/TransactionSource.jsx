@@ -7,6 +7,7 @@ import {prepareExpenceBarChartData} from "../../utils/helper";
 
 const TransactionSource = ({transactions, type}) => {
   const [chartData, setChartData] = useState([]);
+  // console.log("chartData: ", chartData);
 
   useEffect(() => {
     let result;
@@ -15,7 +16,7 @@ const TransactionSource = ({transactions, type}) => {
     }else{
         result = prepareIncomeBarChartData(transactions);
     }
-    console.log("Income Chart Data:", result);
+    // console.log("Income Chart Data:", result);
     setChartData(result);
 
     return () => {
@@ -29,8 +30,7 @@ const TransactionSource = ({transactions, type}) => {
         <div className="">
           <h5 className="text-lg">{type} Overview</h5>
           <p className="text-xs text-gray-400 mt-0.5">
-            {/* Track your earnings over time and analyze your income trends. */}
-            Analyze your {type.toLowerCase()} trends and gain insights into your financial habits.
+            Analyze your {type.toLowerCase()} category wise and gain insights into your financial habits.  
           </p>
         </div>
       </div>

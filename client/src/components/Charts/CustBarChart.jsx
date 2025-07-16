@@ -7,7 +7,7 @@ export default function CustBarChart({ data }) {
     (a, b) =>
       moment(a.date, "Do MMM").toDate() - moment(b.date, "Do MMM").toDate()
   );
-  console.log("data:", data);
+  // console.log("data:", data);
 
   // Function to determine bar colors
   const getBarColor = (index) => {

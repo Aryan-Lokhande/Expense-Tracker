@@ -32,7 +32,7 @@ function Expense() {
       const response = await axiosInstance.get(
         `${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`
       );
-      console.log(response.data);      
+      // console.log(response.data);      
       if (response.data) {
         setExpenseData(response.data);
       }
