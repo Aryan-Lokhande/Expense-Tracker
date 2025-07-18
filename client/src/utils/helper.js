@@ -36,21 +36,31 @@ export const prepareExpenseBarChartData = (data = []) => {
 export const prepareExpenceBarChartData = (data = []) => {
   const grouped = {};
 
-  data.forEach(({ amount, category }) => {
-    if (!grouped[category]) {
-      grouped[category] = 0;
+  data.forEach(({ amount, category, date }) => {
+    const month = new Date(date).toLocaleString("default", { month: "long" });
+    const key = `${category}-${month}`;
+
+    if (!grouped[key]) {
+      grouped[key] = {
+        amount: 0,
+        category,
+        month,
+      };
     }
-    grouped[category] += amount;
+
+    grouped[key].amount += amount;
   });
 
-  // console.log("Grouped Data:", grouped);
-
-  // Properly return an array of objects, not a single object inside an array
-  const chartData = Object.keys(grouped).map((category) => ({
-    date: category,
-    category: category,
-    amount: grouped[category],
-  }));
+  // Properly return an array of objects
+  const chartData = Object.keys(grouped).map((key) => {
+    const { category, amount, month } = grouped[key];
+    return {
+      date: category,
+      category,
+      amount,
+      month,
+    };
+  });
 
   return chartData;
 };
@@ -58,24 +68,35 @@ export const prepareExpenceBarChartData = (data = []) => {
 export const prepareIncomeBarChartData = (data = []) => {
   const grouped = {};
 
-  data.forEach(({ amount, source }) => {
-    if (!grouped[source]) {
-      grouped[source] = 0;
+  data.forEach(({ amount, source, date }) => {
+    const month = new Date(date).toLocaleString("default", { month: "long" });
+    const key = `${source}-${month}`;
+
+    if (!grouped[key]) {
+      grouped[key] = {
+        amount: 0,
+        source,
+        month,
+      };
     }
-    grouped[source] += amount;
+
+    grouped[key].amount += amount;
   });
 
-  // console.log("Grouped Data:", grouped);
-
-  // Properly return an array of objects, not a single object inside an array
-  const chartData = Object.keys(grouped).map((source) => ({
-    date: source,
-    category: source,
-    amount: grouped[source],
-  }));
+  // Properly return an array of objects
+  const chartData = Object.keys(grouped).map((key) => {
+    const { source, amount, month } = grouped[key];
+    return {
+      date: source,
+      category: source,
+      amount,
+      month,
+    };
+  });
 
   return chartData;
 };
+
 
 export const prepareExpenseLineChartData = (data = []) => {
   // Sort data by date
@@ -85,7 +106,8 @@ export const prepareExpenseLineChartData = (data = []) => {
 
   // Format data for chart
   const chartData = sortedData.map((item) => ({
-    month: moment(item?.date).format("Do MMM"), // Fixed format (e.g., "1st Jan")
+    date: moment(item?.date).format("Do MMM"), // Fixed format (e.g., "1st Jan")
+    month: moment(item?.date).format("MMMM"), // Full month name
     amount: item?.amount,
     category: item?.category,
     source: item?.source, // Added source for income data
@@ -98,7 +120,7 @@ export const mergeDataByMonth = (dataObj) => {
   const dataArray = Object.values(dataObj);
   const merged = {};
 
-  dataArray.forEach(({ month, amount, category, source }) => {
+  dataArray.forEach(({ date, amount, category, source }) => {
     let label=""; // Prefer category, fallback to source
     if (category) {
       label = category;
@@ -106,18 +128,26 @@ export const mergeDataByMonth = (dataObj) => {
       label = source;
     }
     // console.log("Label:", label);
-    if (!merged[month]) {
-      merged[month] = {
-        month,
+    if (!merged[date]) {
+      merged[date] = {
+        date,
         amount,
         categories: [label],
       };
     } else {
-      merged[month].amount += amount;
-      merged[month].categories.push(label);
+      merged[date].amount += amount;
+      merged[date].categories.push(label);
     }
   });
 
   // console.log("Merged Data:", merged);
   return Object.values(merged);
+};
+
+export const getUniqueMonthsFromData = (data) => {
+  const monthSet = new Set();
+  data.forEach((item) => {
+    if (item.month) monthSet.add(item.month);
+  });
+  return Array.from(monthSet);
 };

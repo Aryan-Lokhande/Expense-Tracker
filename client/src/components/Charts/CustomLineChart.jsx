@@ -3,6 +3,7 @@ import { XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Area, AreaCh
 import { mergeDataByMonth } from "../../utils/helper";
 
 const CustomLineChart = ({data,view}) => {
+  // console.log("CustomLineChart data:", data);
   const mergedData = mergeDataByMonth(data);
   let color = "";
   if (view === "Income") {
@@ -12,19 +13,17 @@ const CustomLineChart = ({data,view}) => {
   } else {
     color = "#875cf5"; // Default color
   }
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const { amount, categories } = payload[0].payload;
       return (
         <div className="bg-white shadow-md border px-4 py-2 rounded text-sm">
           {/* <p className="font-semibold text-gray-700">{label}</p> */}
-          <p className="text-sm font-medium text-gray-700">
-            <span className="text-sm text-gray-500">
-              Categories:
-            </span>{" "}
+          <p className="text-sm font-semibold text-purple-800">
             {categories?.join(", ")}
-            <br />             
-            <span className="text-sm text-gray-500">Amount:</span> ₹{amount}
+          </p>
+          <p className="text-sm font-medium text-gray-900">
+            <span className="text-sm text-gray-600">Amount:</span> ₹{amount}
           </p>
         </div>
       );
@@ -44,7 +43,7 @@ const CustomLineChart = ({data,view}) => {
 
           <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
           <XAxis
-            dataKey="month"
+            dataKey="date"
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
