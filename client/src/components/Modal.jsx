@@ -1,23 +1,21 @@
 import React from "react";
 
-const Modal = ({children, isOpen, onClose, title}) => {
+const Modal = ({ children, isOpen, onClose, title }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 bg-opacity-50 overflow-y-auto py-4">
-      {" "}
-      {/* Added py-4 for padding */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm overflow-y-auto py-4">
       <div className="relative p-4 w-full max-w-2xl">
-        {/* Modal content - rest remains exactly the same */}
-        <div className="relative bg-white rounded-lg shadow-sm dark:bg-gray-300">
+        {/* Modal content */}
+        <div className="relative bg-secondary rounded-xl shadow-lg border border-gray-700">
           {/* Modal header */}
-          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-700 border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-black">
+          <div className="flex items-center justify-between p-4 md:p-5 border-b border-gray-700 rounded-t">
+            <h3 className="text-lg font-semibold text-white">
               {title}
             </h3>
             <button
               type="button"
-              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              className="text-gray-400 hover:text-red-400 hover:bg-gray-800 rounded-lg text-sm w-8 h-8 flex items-center justify-center transition"
               onClick={onClose}
             >
               <svg
@@ -39,7 +37,9 @@ const Modal = ({children, isOpen, onClose, title}) => {
           </div>
 
           {/* Modal body */}
-          <div className="p-4 md:p-5 space-y-4">{children}</div>
+          <div className="p-4 md:p-5 space-y-4 text-gray-300">
+            {children}
+          </div>
         </div>
       </div>
     </div>

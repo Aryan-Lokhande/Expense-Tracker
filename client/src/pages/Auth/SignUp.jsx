@@ -65,8 +65,8 @@ export default function SignUp() {
   return (
     <AuthLayout>
       <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold text-black">Create an account</h3>
-        <p className="text-xs text-slate-700 mt-[5px] mb-6">
+        <h3 className="text-xl font-semibold text-white">Create an account</h3>
+        <p className="text-xs text-gray-400 mt-[5px] mb-6">
           Join us today by entering your details below
         </p>
 
@@ -99,15 +99,18 @@ export default function SignUp() {
             </div>
           </div>
 
-          {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
+          {error && <p className="text-red-400 text-xs pb-2.5">{error}</p>}
 
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="btn-primary mt-2">
             SIGNUP
           </button>
 
-          <p className="text-[14px] text-slate-700 mt-3">
+          <p className="text-[14px] text-gray-400 mt-3">
             Already have an account?{" "}
-            <Link to="/login" className="font-medium text-primary underline">
+            <Link
+              to="/login"
+              className="font-medium text-primary underline hover:text-violet-400"
+            >
               Login
             </Link>
           </p>

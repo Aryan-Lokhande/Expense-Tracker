@@ -98,25 +98,30 @@ export default function MLFeatures() {
           /> */}
         </div>
 
-        <div className="my-5 mx-auto space-y-10 bg-gray-50 px-6 py-4 rounded-lg shadow">
+        <div className="mt-8 mx-auto space-y-10 bg-[var(--color-secondary)] px-6 py-4 rounded-lg shadow-md shadow-black/10 border border-gray-700">
+          {/* Title Section */}
           <div className="flex items-center gap-2 mb-4 justify-center">
-            <TbChartHistogram className="text-xl text-yellow-600" />
-            <h3 className="text-2xl font-semibold">Expense Prediction</h3>
+            <TbChartHistogram className="text-xl text-yellow-500" />
+            <h3 className="text-2xl font-semibold text-white">
+              Expense Prediction
+            </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left Column – Month-wise Expenses */}
-            <div className="bg-white rounded-xl shadow p-4">
-              <div className="flex items-center gap-2 mb-4  justify-center">
-                <TbCalendarTime className="text-xl text-indigo-600" />
-                <h3 className="text-lg font-semibold">Month-wise Expenses</h3>
+            <div className="bg-[#2A2A2A] rounded-xl shadow p-4 border border-gray-700">
+              <div className="flex items-center gap-2 mb-4 justify-center">
+                <TbCalendarTime className="text-xl text-indigo-400" />
+                <h3 className="text-lg font-semibold text-white">
+                  Month-wise Expenses
+                </h3>
               </div>
-              {/* Map through sorted data here */}
+
               {monthWiseExpenses.length > 0 ? (
                 monthWiseExpenses.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-between text-gray-700 py-2 border-b"
+                    className="flex justify-between text-gray-300 py-2 border-b border-gray-600"
                   >
                     <span>{item.month}</span>
                     <span>
@@ -125,23 +130,25 @@ export default function MLFeatures() {
                   </div>
                 ))
               ) : (
-                <p className="text-sm text-gray-400">No expenses found.</p>
+                <p className="text-sm text-gray-500">No expenses found.</p>
               )}
             </div>
 
-            {/* Right Column – ML Forecast Result */}
-            <div className="bg-white rounded-xl shadow p-4 flex flex-col items-center">
+            {/* Right Column – Forecast Result */}
+            <div className="bg-[#2A2A2A] rounded-xl shadow p-4 flex flex-col items-center border border-gray-700">
               <div className="flex items-center gap-2 mb-4">
-                <BsRobot className="text-xl text-blue-500" />
-                <h3 className="text-lg font-semibold">Forecast: Next Month Expense</h3>
+                <BsRobot className="text-xl text-blue-400" />
+                <h3 className="text-lg font-semibold text-white">
+                  Forecast: Next Month Expense
+                </h3>
               </div>
-              <p className="text-4xl font-bold text-orange-600 ">
+              <p className="text-4xl font-bold text-orange-400">
                 ₹{" "}
                 {forecast !== null
                   ? addThousandsSeparator(forecast.toFixed(2))
                   : "Loading..."}
               </p>
-              <p className="text-gray-500 mt-4 text-sm">
+              <p className="text-gray-400 mt-4 text-sm text-center">
                 Based on your past expense patterns, this is the expected amount
                 you might spend next month.
               </p>
@@ -161,11 +168,13 @@ export default function MLFeatures() {
           </div> */}
         </div>
 
-        <div className="mt-16 p-4 bg-white rounded-lg shadow">
-          <p className="text-gray-700 text-lg">
-            This page is under construction. Please check back later for more updates
-            on ML features.
-          </p>
+        <div className="mt-8 mx-auto space-y-10 bg-[var(--color-secondary)] px-6 py-4 rounded-lg shadow-md shadow-black/10 border border-gray-700">
+          <div className="flex items-center gap-2 mb-4 justify-center">
+            <TbBulb className="text-xl text-yellow-500" />
+            <h3 className="text-2xl font-semibold text-white">
+              ML Features Coming Soon!
+            </h3>
+          </div>
         </div>
       </div>
     </DashboardLayout>

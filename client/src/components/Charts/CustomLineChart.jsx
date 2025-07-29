@@ -11,19 +11,19 @@ const CustomLineChart = ({data,view}) => {
   } else if (view === "Expense") {
     color = "#FA2C37";
   } else {
-    color = "#875cf5"; // Default color
+    color = "var(--color-accent)"; // Default color
   }
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const { amount, categories } = payload[0].payload;
       return (
-        <div className="bg-white shadow-md border px-4 py-2 rounded text-sm">
+        <div className="bg-secondary border border-gray-700 text-white px-4 py-2 rounded text-sm shadow-lg shadow-black/10">
           {/* <p className="font-semibold text-gray-700">{label}</p> */}
-          <p className="text-sm font-semibold text-purple-800">
+          <p className="text-sm font-semibold text-accent">
             {categories?.join(", ")}
           </p>
-          <p className="text-sm font-medium text-gray-900">
-            <span className="text-sm text-gray-600">Amount:</span> ₹{amount}
+          <p className="text-sm font-medium text-gray-300">
+            <span className="text-sm text-gray-400">Amount:</span> ₹{amount}
           </p>
         </div>
       );
@@ -31,7 +31,7 @@ const CustomLineChart = ({data,view}) => {
     return null;
   };
   return (
-    <div className="bg-white">
+    <div className="bg-secondary p-4 rounded-2xl shadow-md border border-gray-700">
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={mergedData}>
           <defs>
@@ -41,14 +41,14 @@ const CustomLineChart = ({data,view}) => {
             </linearGradient>
           </defs>
 
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#2E2E2E" />
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: "#d2dadf" }}
             stroke="none"
           />
           <YAxis
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: "#d2dadf" }}
             stroke="none"
             width={40}
           />
@@ -59,7 +59,7 @@ const CustomLineChart = ({data,view}) => {
             stroke={color}
             fill="url(#incomeGradient)"
             strokeWidth={3}
-            dot={{ r: 3, fill: "#fff" }}
+            dot={{ r: 3, fill: "#ECEFF1" }}
           />
         </AreaChart>
       </ResponsiveContainer>

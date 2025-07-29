@@ -17,7 +17,8 @@ const AddExpenseForm = ({ onAddExpense }) => {
     });
 
   return (
-    <div className="bg-white shadow-md rounded-2xl p-6 space-y-4">
+    <div className="bg-secondary text-white border border-gray-700 shadow-md rounded-2xl p-6 space-y-4">
+      {/* Emoji Picker */}
       <div className="flex justify-center">
         <EmojiPickerPopup
           icon={income.icon}
@@ -25,13 +26,13 @@ const AddExpenseForm = ({ onAddExpense }) => {
         />
       </div>
 
+      {/* Input Fields */}
       <Input
         value={income.category}
         onChange={({ target }) => handleChange("category", target.value)}
         label="Category"
         placeholder="Rent, Groceries, etc"
         type="text"
-        className="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
       />
       <Input
         value={income.amount}
@@ -39,21 +40,20 @@ const AddExpenseForm = ({ onAddExpense }) => {
         label="Amount"
         placeholder="0.00"
         type="number"
-        className="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
       />
       <Input
         value={income.date}
         onChange={({ target }) => handleChange("date", target.value)}
         label="Date"
         type="date"
-        className="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
       />
 
+      {/* Submit Button */}
       <div className="flex justify-end">
         <button
           type="button"
           onClick={() => onAddExpense(income)}
-          className="px-6 py-2 rounded-lg bg-gradient-to-r from-rose-400 to-pink-500 text-white font-semibold hover:from-rose-500 hover:to-pink-600 transition-shadow shadow-md hover:shadow-lg"
+          className="px-6 py-2 rounded-lg bg-rose-500 hover:bg-rose-600 text-white font-semibold transition-shadow shadow-lg hover:shadow-pink-800"
         >
           Add Expense
         </button>

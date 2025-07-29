@@ -7,7 +7,8 @@ const COLORS = [
   "#FF6908", // Orange
   "#413916", // Dark yellow/brown
 ];
-const RecentIncomeWithChart = ({data, totalIncome}) => {
+
+const RecentIncomeWithChart = ({ data, totalIncome }) => {
   const [chartData, setChartData] = useState([]);
 
   const prepareChartData = () => {
@@ -25,8 +26,8 @@ const RecentIncomeWithChart = ({data, totalIncome}) => {
 
   return (
     <div className="card">
-      <div className="flex items-center justify-between">
-        <h5 className="text-lg">Last 60 Days Income</h5>
+      <div className="flex items-center justify-between mb-4">
+        <h5 className="text-lg text-white">Last 60 Days Income</h5>
       </div>
       <CustomPieChart
         data={chartData}

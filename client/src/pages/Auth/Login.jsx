@@ -58,47 +58,57 @@ export default function Login() {
   return (
     <AuthLayout>
       <br />
-      <div className="bg-primary/10 border-l-4 border-blue-500 p-4 rounded shadow-md text-sm my-4 w-fit">
-        <p className="font-semibold">Demo Credentials:</p>
-        <p className="mt-2"><span className="font-medium">DemoUser</ span> → <code>demo.user@expensetracker.io</code>,&nbsp; <span className="font-medium">Pass: </span> <code>TrackDemo@321</code></p>
+      <div className="bg-secondary border-l-4 border-blue-500 p-4 rounded shadow-md text-sm my-4 w-fit text-gray-300">
+        <p className="font-semibold text-white">Demo Credentials:</p>
+        <p className="mt-2">
+          <span className="font-medium text-white">DemoUser</span> →
+          <code className="text-blue-400"> demo.user@expensetracker.io</code>
+          ,&nbsp;
+          <span className="font-medium text-white">Pass: </span>
+          <code className="text-blue-400">TrackDemo@321</code>
+        </p>
       </div>
-     
+
       <div className="lg:w-[70%] pt-6 flex flex-col justify-center">
-        <h3 className="text-xl font-semibold">Welcome</h3>
-        <p className="text-gray-500 text-xs mb-6 mt-[5px]">
+        <h3 className="text-xl font-semibold text-white">Welcome</h3>
+        <p className="text-gray-400 text-xs mb-6 mt-[5px]">
           Please login to your account to continue using the Expense Tracker
           application.
         </p>
+
         <form onSubmit={handleLogin}>
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             label="Email Address"
-            placeholder="Enter you email"
+            placeholder="Enter your email"
             type="text"
           />
 
           <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              label="Password "
-              placeholder="Minimum 8 characters"
-              type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            placeholder="Minimum 8 characters"
+            type="password"
           />
-          {error && (
-              <p className="text-red-500 text-xs pb-2.5"> {error} </p>
-          )}
-          <button type="submit" className="btn-primary">
-              LOGIN
-          </button>
-          <p className="text-[13px] text-slate-800 mt-3">
-              Don't have an account?{" "}
-              <Link to="/signup" className="font-medium text-primary underline">
-                  Signup
-              </Link>
-          </p>
-      </form>
 
+          {error && <p className="text-red-400 text-xs pb-2.5">{error}</p>}
+
+          <button type="submit" className="btn-primary">
+            LOGIN
+          </button>
+
+          <p className="text-[13px] text-gray-400 mt-3">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="font-medium text-primary underline hover:text-accent"
+            >
+              Signup
+            </Link>
+          </p>
+        </form>
       </div>
     </AuthLayout>
   );

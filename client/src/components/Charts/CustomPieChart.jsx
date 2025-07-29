@@ -1,9 +1,22 @@
 import React from "react";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from "recharts";
 import CustomTooltip from "./CustomTooltip.jsx";
 import CustomLegend from "./CustomLegend.jsx";
 
-const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
+const CustomPieChart = ({
+  data,
+  label,
+  totalAmount,
+  colors,
+  showTextAnchor,
+}) => {
   return (
     <ResponsiveContainer width="100%" height={380}>
       <PieChart>
@@ -21,8 +34,42 @@ const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
             <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
           ))}
         </Pie>
-        <Tooltip content={CustomTooltip} />
-        <Legend content={CustomLegend} />
+
+        <Tooltip
+          content={({ active, payload }) => {
+            if (active && payload && payload.length) {
+              const { name, amount } = payload[0].payload;
+              return (
+                <div className="bg-secondary text-white border border-gray-700 p-2 rounded shadow-md text-sm">
+                  <p className="font-semibold text-accent mb-1">
+                    {name}
+                  </p>
+                  <p>
+                    ₹<span className="font-medium">{amount}</span>
+                  </p>
+                </div>
+              );
+            }
+            return null;
+          }}
+        />
+
+        <Legend
+          content={({ payload }) => (
+            <ul className="flex justify-center gap-4 mt-4 text-sm text-gray-300">
+              {payload.map((entry, index) => (
+                <li key={`item-${index}`} className="flex items-center gap-2">
+                  <span
+                    className="w-3 h-3 inline-block rounded-full"
+                    style={{ backgroundColor: entry.color }}
+                  />
+                  {entry.value}
+                </li>
+              ))}
+            </ul>
+          )}
+        />
+
         {showTextAnchor && (
           <>
             <text
@@ -30,7 +77,7 @@ const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
               y="50%"
               dy={-25}
               textAnchor="middle"
-              fill="#666"
+              fill="#B0BEC5"
               fontSize="14px"
             >
               {label}
@@ -40,9 +87,9 @@ const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
               y="50%"
               dy={8}
               textAnchor="middle"
-              fill="#333"
+              fill="#ECEFF1"
               fontSize="24px"
-              fontWeight="semi-bold"
+              fontWeight="600"
             >
               {totalAmount}
             </text>

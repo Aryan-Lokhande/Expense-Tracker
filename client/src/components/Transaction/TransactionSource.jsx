@@ -46,7 +46,7 @@ const TransactionSource = ({transactions, type}) => {
 
         {/* Month Selector (Collider) */}
         <select
-          className="text-sm px-3 py-1 border border-gray-300 rounded-md outline-none border-primary/40 bg-primary/10 text-primary"
+          className="text-sm px-3 py-1 border border-gray-300 rounded-md outline-none border-secondary/40 bg-accent/30 text-accent"
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
         >

@@ -11,18 +11,18 @@ export default function CustBarChart({ data }) {
 
   // Function to determine bar colors
   const getBarColor = (index) => {
-    return index % 2 === 0 ? "#875cf5" : "#cfbefb";
+    return index % 2 === 0 ? "var(--color-accent)" : "#A98BFF";
   };
-  const CustomTooltip = ({ active, payload }) => {
+ const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
+        <div className="bg-secondary border border-gray-700 rounded-lg p-2 shadow-lg text-white">
+          <p className="text-xs font-semibold text-accent mb-1">
             {payload[0].payload.category}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400">
             Amount:{" "}
-            <span className="text-sm font-medium text-gray-900">
+            <span className="font-medium text-gray-300">
               ₹{payload[0].payload.amount}
             </span>
           </p>
@@ -31,29 +31,34 @@ export default function CustBarChart({ data }) {
     }
     return null;
   };
+
   return (
-    <div className="bg-white mt-6">
+    <div className="bg-secondary mt-6 rounded-2xl border border-gray-700 shadow-md shadow-black/10 p-4">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
-          <CartesianGrid stroke="none" />
+        <CartesianGrid strokeDasharray="3 3" stroke="#2E2E2E" vertical={false} />
           <XAxis
             dataKey="date"
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: "#d2dadf" }}
             stroke="none"
           />
-          <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
+          <YAxis tick={{ fontSize: 12, fill: "#d2dadf" }} stroke="#2E2E2E" />
           <Tooltip content={CustomTooltip} />
           <Bar
             dataKey="amount"
-            fill="#fff"
+            fill="var(--color-secondary)"
             radius={[10, 10, 0, 0]}
-            activeDot={{ r: 8, fill: "yellow" }}
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={getBarColor(index)} />
             ))}
           </Bar>
-          <Legend />
+          <Legend
+            wrapperStyle={{
+              color: "#B0BEC5",
+              fontSize: "12px",
+            }}
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>
