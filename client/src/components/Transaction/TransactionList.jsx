@@ -9,7 +9,7 @@ const TransactionList = ({transactions, onDelete, onDownload, list}) => {
   return (
     <div className="card">
       <div className="flex items-center justify-between">
-        <h5 className="text-lg">ALL {list}</h5>
+        <h5 className="text-lg font-medium">ALL {list}'s</h5>
         <button className="card-btn" onClick={onDownload}>
           <LuDownload className="text-base" /> Download
         </button>

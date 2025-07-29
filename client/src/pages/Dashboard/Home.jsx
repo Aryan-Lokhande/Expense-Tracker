@@ -100,6 +100,7 @@ const Home = () => {
           <Last30DaysExpenses
             data={dashboardData?.last30DaysExpenses?.transactions || []}
           />
+
           <RecentIncomeWithChart
             data={
               dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []

@@ -38,7 +38,7 @@ const TransactionSource = ({transactions, type}) => {
     <div className="card">
       <div className="flex items-center justify-between">
         <div>
-          <h5 className="text-lg">{type} Overview</h5>
+          <h5 className="text-lg font-medium">{type} Overview</h5>
           <p className="text-xs text-gray-400 mt-0.5">
             Analyze your {type.toLowerCase()} category wise and gain insights into your financial habits.
           </p>

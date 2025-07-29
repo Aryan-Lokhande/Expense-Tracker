@@ -32,7 +32,7 @@ const Overview = ({ transactions, onExpenseIncome, view }) => {
     <div className="card">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="">
-          <h5 className="text-lg">{viewType} Overview</h5>
+          <h5 className="text-lg font-medium">{viewType} Overview</h5>
           <p className="text-xs text-gray-400 mt-0.5">
             Analyze your {viewType.toLowerCase()} trends and gain insights into
             your financial habits.
